@@ -1,0 +1,193 @@
+{% extends 'ownbase.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .dropbtn {
+      background-color: #04AA6D;
+      color: white;
+      padding:10px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      
+      width:7em;
+    }
+    
+    .dropbtn:hover, .dropbtn:focus {
+      background-color: #3e8e41;
+    }
+    
+    #myInput {
+      box-sizing: border-box;
+      background-image: url('searchicon.png');
+      background-position: 14px 12px;
+      background-repeat: no-repeat;
+      font-size: 16px;
+      padding: 14px 20px 12px 45px;
+      border: none;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    #myInput:focus {outline: 3px solid #ddd;}
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f6f6f6;
+      width: auto;
+      max-height: 200px; /* Adjust the height as needed */
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      z-index: 1;
+    }
+    
+    .dropdown-content header {
+      position: sticky;
+      top: 0;
+      background-color: #f6f6f6;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown a:hover {background-color: #ddd;}
+    
+    .show {display: block;}
+    </style>
+
+    
+    
+</head>
+  <body >
+    {% if request.user.is_superuser or request.user.is_staff %}
+    <div class="row">
+      <div class="col-sm-6 ">
+        <div class="card text-start mx-auto mt-3 text-white" style="width: 30rem; background-color:#333F63">
+          <div class="card-body" >
+            <h5 class="card-title">Total No.of candidates Registred <button type="button" class="btn btn-secondary rounded-sm float-end">{{ tc }}</button>
+            </h5><br>
+            <h5 class="card-title"><a href="today_applied_list/" class="text-decoration-none text-white">candidates Registred on {{today_date}}</a> <button type="button" class="btn btn-secondary rounded-sm float-end">{{ CFTc }}</button></h5>
+          </h5><br>
+          <h5 class="card-title"><a href="one_month_applied_list/" class="text-decoration-none text-white">candidates Registred <br> from {{ yesterday }} to {{today_date}}</a>  <button type="button" class="btn btn-secondary rounded-sm float-end">{{ CFYc }}</button>
+          </h5>
+            <div class="dropdown mt-3">
+              <button onclick="myFunction()" class="dropbtn">Today List</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <header>
+                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                  </header>
+                  <ul>
+                    {% for i in CFT %}
+                    <li><a href="single_filter/{{i.id }}/">{{ i.Name }}</a></li>
+                    {% endfor %}
+                    
+                  </ul>
+                </div>
+            </div>
+            <span style="float:right">
+            <a class="btn btn-primary mt-3 " href="candidates_list/" >
+              Candidates List
+          </a>
+        </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 ">
+        <div class="card mb-3 text-center ms-auto me-4 mt-3" style="width: 25rem; background-color:#333F63">
+          <div class="card-body">
+            
+              <h5 class="card-title text-white" >Total No.of Candidates Consider to Client  <button type="button" class="btn btn-secondary rounded-sm float-end">{{ consider_to_client_count }}</button></h5>
+
+              <a class="btn btn-warning " href="/review_filter/consider_to_client" >
+                  Candidates List
+              </a>
+            
+          </div>
+        </div>
+        
+        <div class="card text-center mb-3 ms-auto me-4 mt-3" style="width: 25rem; background-color:#333F63">
+          <div class="card-body">
+            <a class="text-decoration-none text-white" href="/review_filter/internal_hiring" >
+              <h5 class="card-title">Total No.of candidates Internal Hiring   <button type="button" class="btn btn-secondary rounded-sm float-end">{{ internal_hiring_count }}</button></h5>
+          </a>
+            
+              <a class="btn btn-success " href="/review_filter/internal_hiring" >
+                  Candidates List
+              </a>
+    
+          </div>
+        </div>
+        
+        <div class="card text-center ms-auto me-4 mt-3" style="width: 25rem;background-color:#333F63">
+          <div class="card-body">
+            <a class="text-decoration-none text-white" href="/review_filter/reject" >
+              <h5 class="card-title">Total No.of candidates reject <button type="button" class="btn btn-secondary rounded-sm float-end"> {{ reject_count }}</button></h5>
+          </a>
+            
+              <a class="btn btn-danger " href="/review_filter/reject"  >
+                  Candidates List
+              </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+       
+    <script>
+      /* When the user clicks on the button,
+      toggle between hiding and showing the dropdown content */
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+      
+      function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.querySelector(".dropdown-content ul");
+        a = ul.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+          txtValue = a[i].textContent || a[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+          } else {
+            a[i].style.display = "none";
+          }
+        }
+      }
+      </script>
+      
+        {{ redirect_to_login_immediately }} 
+  {% else %}
+  <div class="card text-center text-white mb-auto ms-auto me-auto mt-4" style="width: 25rem; background-color:#333F63">
+  <div class="card-body">
+
+    <h5>Please Login to Access The DashBoard</h5>
+    <h6>Click on Admin in the Navbar! </h6>
+
+  </div>
+    </div>
+  {% endif %}
+</body>
+</html>
+
+
+
+{% endblock %}
+

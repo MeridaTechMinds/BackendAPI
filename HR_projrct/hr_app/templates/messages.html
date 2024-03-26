@@ -1,0 +1,86 @@
+{% extends 'ownbase.html' %}
+
+
+
+{% block dashboard %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href={% url 'dashboard' %}>Dashboard</a>
+</li>
+{% endblock %}
+
+{% block review %}
+<!-- <form class="d-flex" role="search" method="POST">
+  {% csrf_token %}
+  <input class="form-control me-2" type="search" name="search" placeholder="Search by Name" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form> -->
+{% endblock %}
+
+
+{% block messages %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Styling for the container */
+    .container {
+        position: relative;
+        width: 100%;
+        height: 200px; /* Adjust height as needed */
+        overflow: hidden;
+        border: 1px solid #ccc;
+    }
+    
+    /* Styling for the flowing text */
+    .flowing-text {
+        position: absolute;
+        top: -50px; /* Initial position */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        animation: flowDown 2s linear infinite; /* Change animation duration as needed */
+    }
+    
+    /* Keyframes for the animation */
+    @keyframes flowDown {
+        0% { top: -50px; }
+        100% { top: 100%; }
+    }
+    .flowing-text
+        {
+            text-decoration:none
+        }
+</style>
+<body>
+
+
+
+{% if message %}
+<div class="container">
+    <a href="#" class="flowing-text">{{ message }}</a>
+    
+</div>
+{% endif %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the flowing text element
+        var flowingText = document.querySelector(".flowing-text");
+
+        // Add event listener to animation end event
+        flowingText.addEventListener("animationiteration", function() {
+            // Redirect to the previous page
+            window.history.back();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
+{% endblock %}

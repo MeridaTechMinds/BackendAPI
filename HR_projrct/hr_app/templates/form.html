@@ -1,0 +1,515 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style>
+    @media (max-width: 767px) {
+      .reg-form{
+        width: 100%;
+        padding: 10px;
+      }
+      }
+      @media only screen and (min-width: 1200px) {
+        .reg-form{
+            width: 50%;
+          }
+      }
+
+</style>
+<style>
+
+    .experience-tags {
+        padding: 10px 20px;
+        border-radius: 4px;
+        background-color: #fafafa;
+        width: 300px;
+        margin-bottom: 10px;
+        border-bottom: 0 0 5px 5px rgba(20, 19, 19, 0.08);
+    }
+
+    .wrapper-tags-experience {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+        
+        box-shadow: inset 0 0 1px 0 #cbcbcb;
+        padding: 10px;
+    }
+
+    .input-tag-experience {
+        border: none;
+        outline:none;
+        background-color: transparent;
+        padding: 4px 0;
+        flex: 1;
+    }
+
+    /* Additional styles for the experience tags */
+
+    /* Add the styles for technical and general skills */
+    .soft-item-tag,
+    .technical-item-tag,
+    .general-item-tag {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        width: max-content;
+        box-shadow: 0 2px 10px 0 rgb(0,0,0,8%);
+        padding: 3px;
+        background-color: #9b51eb;
+        color: #FFF;
+        font-size: 16px;
+        cursor: default;
+        border-radius:20px;
+    }
+
+    .btn-rm-tag {
+        width: 18px;
+        height: 18px;
+        border: none;
+        border-radius: 50%;
+        display: grid;
+        place-content:center;
+        font-size: 11px;
+        cursor: pointer;
+    }
+</style>
+
+<style>
+    .red-asterisk {
+        color: red;
+    }
+</style>
+
+
+</head>
+<body >
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'mimg-removebg-preview.png' %}" alt="Your Logo" width="100" class="ms-3">
+        </a>
+        <div class="d-flex justify-content-center w-100"> <!-- Center-align the content -->
+            <h3 class="text-white">Job Application Form</h3>
+        </div>
+    </nav>
+    
+    <form method="POST" class="reg-form mx-auto" style="margin-top:44px;" id='myForm'>
+        {% csrf_token %}
+
+        <h4>Personal Information</h4>
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- oninput="console.log(this.value);" -->
+            <label for="name" class="form-label">Name <span class="red-asterisk">*</span></label>
+              <input type="text" name="name" class="form-control" placeholder="Candidate Name" aria-label="First name" required >
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0">
+                <label for="name" class="form-label">Email <span class="red-asterisk">*</span></label>
+              <input type="email" name="mail" class="form-control" placeholder="abcd@gmail.com" required >
+            </div>
+        </div>
+
+        <div class="row mt-2 mt-sm-3 mb-3">
+            <div class="col-sm-6">
+                <label for="name" class="form-label">Primary Contact <span class="red-asterisk">*</span></label>
+              <input type="tel" name="pc" class="form-control" placeholder="70934xxxxx" aria-label="" required>
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0">
+                <label for="name" class="form-label">Secondary Contact </label>
+                <input type="tel" name="sc" class="form-control" placeholder="70934xxxxx" aria-label="Last name" >
+            </div> 
+        </div>
+        <div class="row mt-2 mt-sm-3 mb-3">
+            <div class="col-sm-6">
+                <label for="name" class="form-label">Location <span class="red-asterisk">*</span></label>
+              <input type="text" name="location" class="form-control" placeholder="Current Location" aria-label="" required>
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0 invisible">
+              <input type="text"  class="form-control" >
+            </div>
+        </div>
+       
+        <!-- Existing code remains unchanged -->
+         <!-- General Skills -->
+        <h4 >Skills :</h4>
+        <div class="row mb-3">
+            <div class="col-5">
+                <label for="name" class="form-label">General skills <span class="red-asterisk">*</span></label>
+                <input type="text" name="general-skill-input" class="form-control input-tag" id="general-skill-input"  placeholder="IT recruitment, Marketing..." required>
+            </div>
+            <div class="col-4">
+                <label for="name" class="form-label">Experience<span class="red-asterisk">*</span></label>
+                <input type="number" name="general-skill-input" class="form-control input-experience" id="general-experience-input" min="0" max="100" placeholder="Experience" required>
+            </div>
+            <div class="col-3 d-flex align-items-end">
+                <button type="button" class="btn btn-sm py-2 px-3 mt-auto" onclick="addGeneralSkill()" style="background-color: #4CAF50; color: #fff; border: none; cursor: pointer;">Add</button>
+            </div>
+        </div>
+        
+        
+
+        <!-- General Skills with Experience -->
+        <p style="font-weight:500; display: block;">General Skills with Experience</p>
+        <div class="experience-tags mb-3">
+            <div class="wrapper-tags-experience" id="general-experience-tags">
+                <!-- General skills with experience tags will be rendered here -->
+            </div>
+            <span class="tags-length" id="general-experience-tags-length" style="color:#cbcbcb">0 Skills with Experience</span>
+        </div>
+        
+
+        <!-- Technical Skills -->
+    
+        <div class="row mb-3">
+            <div class="col-5">
+                <label for="name" class="form-label">Technical Skills<span class="red-asterisk">*</span></label>
+              <input type="text" name="" class="form-control input-tag" id="technical-skill-input"  placeholder="Programming Languages,Web page Desiginings DataBases..." aria-label="First name" required>
+            </div>
+            <div class="col-4">
+                <label for="name" class="form-label">Experience<span class="red-asterisk">*</span></label>
+              <input type="number" name="" class="form-control input-experience" id="technical-experience-input" min="0" max="100" placeholder="Experience" aria-label="Last name" required>
+            </div>
+            <div class="col-3 d-flex align-items-end">
+                <button type="button" class="btn btn-sm py-2 px-3" onclick="addTechnicalSkill()" style=" background-color: #4CAF50; color: #fff; border: none;cursor: pointer;">Add</button>
+            </div>
+        </div>
+
+        <!-- Technical Skills with Experience -->
+        <p style="font-weight:500; display: block; margin-bottom: 5px;">Technical Skills with Experience</p>
+        
+        <div class="experience-tags">
+            <div class="wrapper-tags-experience" id="technical-experience-tags">
+                <!-- Technical skills with experience tags will be rendered here -->
+            </div>
+            <span class="tags-length" id="technical-experience-tags-length" style="color:#cbcbcb">0 Skills with Experience</span>
+        </div><br>
+
+        <div class="row mb-3">
+            <div class="col-5">
+                <label for="name" class="form-label">Soft Skills <span class="red-asterisk">*</span></label>
+              <input type="text" name="" class="form-control input-tag" id="soft-skill-input" placeholder="Ex:communication,organization..." aria-label="First name" required>
+            </div>
+            <div class="col-4">
+            <label for="name" class="form-label">Experience<span class="red-asterisk">*</span></label>
+              <input type="number" name="email" class="form-control input-experience" id="soft-experience-input" min="0" max="100" placeholder="Experience" aria-label="Last name" required>
+            </div>
+            <div class="col-3 d-flex align-items-end">
+                <button type="button" class="btn btn-sm py-2 px-3" onclick="addSoftSkill()" style=" background-color: #4CAF50; color: #fff; border: none;cursor: pointer;">Add</button>
+            </div>
+        </div>
+
+        <!-- Soft Skills with Experience -->
+        <p style="font-weight:500; display: block; margin-bottom: 5px;">Soft Skills with Experience</p>
+        <div class="experience-tags">
+            <div class="wrapper-tags-experience" id="soft-experience-tags">
+                <!-- Soft skills with experience tags will be rendered here -->
+            </div>
+            <span class="tags-length " style="color:#cbcbcb" id="soft-experience-tags-length" >0 Skills with Experience</span>
+        </div><br>
+
+        <h4>Additional Information</h4>
+
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label for="name" class="form-label">Current CTC <span class="red-asterisk">*</span></label>
+              <input type="text" name="cctc" class="form-control" placeholder="Current CTC" aria-label="First name" required>
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0">
+                <label for="name" class="form-label">Excepted CTC </label>
+              <input type="text" name="ectc" class="form-control" placeholder="Excepted CTC" aria-label="Last name" >
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label for="name" class="form-label">Current Designation <span class="red-asterisk">*</span></label>
+              <input type="text" name="d" class="form-control" placeholder="Current Designation" aria-label="" required>
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0">
+                <label for="name" class="form-label">Applied Designation <span class="red-asterisk">*</span></label>
+              <input type="text" name="ad" class="form-control" placeholder="Software developer,HR .." aria-label="" required>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label for="name" class="form-label">Notice Period <span class="red-asterisk">*</span></label>
+              <input type="number" name="np" class="form-control" placeholder="EX:30 in days" aria-label="" required min="0">
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0">
+                <label for="name" class="form-label">Experience <span class="red-asterisk">*</span></label>
+              <input type="number" name="exp" class="form-control" placeholder="if Fresher Enter 0" aria-label="Last name" required min="0">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label for="name" class="form-label">Job Portal Source <span class="red-asterisk">*</span></label>
+              <input type="text" name="htkau" class="form-control" placeholder="linkedin,Foundit..." aria-label="" required>
+            </div>
+            <div class="col-sm-6 mt-2 mt-sm-0">
+                <label for="name" class="form-label">Contacted by <span class="red-asterisk">*</span></label>
+              <input type="text" name="cb" class="form-control" placeholder="Contacted by" aria-label="Last name" required>
+            </div>
+        </div>
+       
+        <!-- Hidden input fields to store JSON data -->
+        <input type="hidden" id="tags-list-input" name="s_skills" >
+        <input type="hidden" id="tags-list-input1" name="t_skills" >
+        <input type="hidden" id="tags-list-input2" name="g_skills" >
+
+        <br>
+        
+        <div class="text-center mt-5">
+            <button type="submit" class="btn btn-success" style="padding: 8px; border-radius: 5px; cursor: pointer;" id="submitBtn">Submit</button>
+        </div><br>
+    </form>
+
+        <footer style="background-color: #333; color: #fff; padding: 10px; text-align: center;">
+            <div>
+                <p style="margin: 0;">&copy; 2024 Merida Tech Minds (OPC) Pvt.Ltd. All rights reserved.</p>
+                <p style="margin: 0;">20-2 ,Keshava Krupa Building 2nd Floor, 30th cross, 10th Main Rd, 4th Block, Jayanagar, Bengaluru, Karnataka 560011</p>
+                <p style="margin: 0;">Email: info@meridatechminds.com | Phone: +91 8904599283</p>
+                <!-- Social Media Icons -->
+        <div style="margin-top: 10px;">
+            <a href="https://www.facebook.com/MeridaTechMinds/" target="_blank" style="text-decoration: none; color: #fff; margin-right: 10px;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/meridatechminds_/" target="_blank" style="text-decoration: none; color: #fff; margin-right: 10px;">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" target="_blank" style="text-decoration: none; color: #fff; margin-right: 10px;">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/MTechminds/" target="_blank" style="text-decoration: none; color: #fff;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+            </div>
+        </footer>
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(){
+            document.getElementById("submitBtn").disabled = true;
+        });
+    </script>
+    <script>
+        // Add these functions in the script section
+
+        const soft_skill_input = document.querySelector('#soft-skill-input');
+        const soft_experience_input = document.querySelector('#soft-experience-input');
+        const technical_skill_input = document.querySelector('#technical-skill-input');
+        const technical_experience_input = document.querySelector('#technical-experience-input');
+        const general_skill_input = document.querySelector('#general-skill-input');
+        const general_experience_input = document.querySelector('#general-experience-input');
+        const soft_experience_tags = document.querySelector('#soft-experience-tags');
+        const technical_experience_tags = document.querySelector('#technical-experience-tags');
+        const general_experience_tags = document.querySelector('#general-experience-tags');
+        const soft_experience_tags_length = document.querySelector('#soft-experience-tags-length');
+        const technical_experience_tags_length = document.querySelector('#technical-experience-tags-length');
+        const general_experience_tags_length = document.querySelector('#general-experience-tags-length');
+        let soft_skills_list = [];
+        let technical_skills_list = [];
+        let general_skills_list = [];
+    
+        function addSoftSkill() {
+            const skill = soft_skill_input.value.trim();
+            const experience = soft_experience_input.value.trim();
+            if (skill && !soft_skills_list.some(tag => tag.text === skill)) {
+                soft_skills_list.push({
+                    id: Math.random().toString(10).substring(2, 10),
+                    text: skill,
+                    experience: experience,
+                });
+
+                soft_skill_input.value = "";
+                soft_experience_input.value = "";
+                RenderSoftSkills();
+                if (soft_skills_list.length > 0) {
+                    soft_skill_input.removeAttribute('required');
+                    soft_experience_input.removeAttribute('required');
+                }
+            } else if (soft_skills_list.some(tag => tag.text === skill)) {
+                alert('Duplicate skill');
+            }
+        }
+
+        function addTechnicalSkill() {
+            {% comment %} if (technical_skill_input.value!=null && technical_skill_input.value!=" "){ {% endcomment %} {% endcomment %}
+
+            const skill = technical_skill_input.value.trim();
+            const experience = technical_experience_input.value.trim();
+
+            if (skill && !technical_skills_list.some(tag => tag.text === skill)) {
+                technical_skills_list.push({
+                    id: Math.random().toString(10).substring(2, 10),
+                    text: skill,
+                    experience: experience,
+                });
+
+                technical_skill_input.value = "";
+                technical_experience_input.value = "";
+                RenderTechnicalSkills();
+                if (technical_skills_list.length > 0) {
+                    technical_skill_input.removeAttribute('required');
+                    technical_experience_input.removeAttribute('required');
+                }
+            } else if (technical_skills_list.some(tag => tag.text === skill)) {
+                alert('Duplicate skill');
+            }
+        {% comment %} } {% endcomment %}
+        }
+
+        function addGeneralSkill() {
+            const skill = general_skill_input.value.trim();
+            const experience = general_experience_input.value.trim();
+
+            
+            if (skill && !general_skills_list.some(tag => tag.text === skill)) {
+                general_skills_list.push({
+                    id: Math.random().toString(10).substring(2, 10),
+                    text: skill,
+                    experience: experience,
+                });
+
+                general_skill_input.value = "";
+                general_experience_input.value = "";
+                RenderGeneralSkills();
+
+                if (general_skills_list.length > 0) {
+                    general_skill_input.removeAttribute('required');
+                    general_experience_input.removeAttribute('required');
+                }
+            } else if (general_skills_list.some(tag => tag.text === skill)) {
+                alert('Duplicate skill');
+
+            }
+        }
+
+        function RenderSoftSkills() {
+            document.querySelectorAll('.soft-item-tag').forEach(element => element.remove());
+            soft_skills_list.forEach(tag => {
+                const cache = `<div class="soft-item-tag">
+                                <span>${tag.text} - Exp: ${tag.experience}</span>
+                                <button type="button" data-id="${tag.id}" class="btn-rm-tag">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>`;
+
+                soft_experience_tags.insertAdjacentHTML('afterbegin', cache);
+            });
+
+            HandleRmSoftTags();
+
+            soft_experience_tags_length.textContent = `${soft_skills_list.length} Skill with Experience`;
+
+            const softInputTags = document.querySelector('#tags-list-input');
+            softInputTags.value = JSON.stringify(soft_skills_list.map(tag => `${tag.text},${tag.experience}`));
+
+        }
+
+        function RenderTechnicalSkills() {
+            document.querySelectorAll('.technical-item-tag').forEach(element => element.remove());
+            technical_skills_list.forEach(tag => {
+                const cache = `<div class="technical-item-tag">
+                                <span>${tag.text} - Exp: ${tag.experience}</span>
+                                <button type="button" data-id="${tag.id}" class="btn-rm-tag">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>`;
+
+                technical_experience_tags.insertAdjacentHTML('afterbegin', cache);
+            });
+
+            HandleRmTechnicalTags();
+
+            technical_experience_tags_length.textContent = `${technical_skills_list.length} Skills with Experience`;
+
+            const technicalInputTags = document.querySelector('#tags-list-input1');
+
+            technicalInputTags.value = JSON.stringify(technical_skills_list.map(tag => `${tag.text},${tag.experience}`));
+            
+        }
+
+        function RenderGeneralSkills() {
+            document.querySelectorAll('.general-item-tag').forEach(element => element.remove());
+            general_skills_list.forEach(tag => {
+                const cache = `<div class="general-item-tag">
+                                <span>${tag.text} - Exp: ${tag.experience}</span>
+                                <button type="button" data-id="${tag.id}" class="btn-rm-tag">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>`;
+
+                general_experience_tags.insertAdjacentHTML('afterbegin', cache);
+            });
+
+            HandleRmGeneralTags();
+
+            general_experience_tags_length.textContent = `${general_skills_list.length} Skills with Experience`;
+    
+            const generalInputTags = document.querySelector('#tags-list-input2');
+            generalInputTags.value = JSON.stringify(general_skills_list.map(tag => `${tag.text},${tag.experience}`));
+
+        }
+
+        function HandleRmSoftTags() {
+            const btns = document.querySelectorAll('.btn-rm-tag');
+
+            if (btns.length > 0) {
+                btns.forEach(button => {
+                    button.onclick = function () {
+                        const data_id = button.getAttribute("data-id");
+                        soft_skills_list = soft_skills_list.filter(tag => tag.id !== data_id);
+                        RenderSoftSkills();
+                    };
+                });
+            }
+        }
+
+        function HandleRmTechnicalTags() {
+            const btns = document.querySelectorAll('.btn-rm-tag');
+
+            if (btns.length > 0) {
+                btns.forEach(button => {
+                    button.onclick = function () {
+                        const data_id = button.getAttribute("data-id");
+                        technical_skills_list = technical_skills_list.filter(tag => tag.id !== data_id);
+                        RenderTechnicalSkills();
+                    };
+                });
+            }
+        }
+
+        function HandleRmGeneralTags() {
+            const btns = document.querySelectorAll('.btn-rm-tag');
+
+            if (btns.length > 0) {
+                btns.forEach(button => {
+                    button.onclick = function () {
+                        const data_id = button.getAttribute("data-id");
+                        general_skills_list = general_skills_list.filter(tag => tag.id !== data_id);
+                        RenderGeneralSkills();
+                    };
+                });
+            }
+        }
+    </script>
+
+    
+
+</body>
+</html>
+
+
+
+
+
+

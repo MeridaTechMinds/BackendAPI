@@ -1,0 +1,242 @@
+{% extends 'ownbase.html' %}
+
+{% block dashboard %}
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="dashboard">Dashboard</a>
+</li>
+{% endblock %}
+
+{% block review %}
+<form class="d-flex" role="search" method="POST">
+  {% csrf_token %}
+  <input class="form-control me-2" type="search" name="search" placeholder="Search by Name,ReviewedBy" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}
+
+
+
+{% block filter %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+  <style>
+    .table-container {
+      width: auto; /* Set width of container */
+      height: 400px; /* Set height of container */
+      overflow: auto; /* Enable both horizontal and vertical scrolling */
+      position: relative; /* Required for fixed headers */
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    thead th {
+      position: sticky; /* Make headers sticky */
+      top: 0; /* Stick to the top of the container */
+      background-color: #f2f2f2; /* Header background color */
+    }
+    
+    tr:nth-child(even){background-color: #f2f2f2}
+    </style>
+  
+</head>
+<body>
+  
+  <div class="table-container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Reviewed at</th>
+            <th scope="col">Name</th>
+            <th scope="col">Reviewed By</th>
+            <th scope="col">Moral character</th>
+            <th scope="col">punctuality</th>
+            <th scope="col">Health</th>
+    
+            <th scope="col">Behaviour</th>
+            <th scope="col">Attitude</th>
+            <th scope="col">Career goals</th>
+            <th scope="col">Understanding Level</th>
+            <th scope="col">Possitive Attitude and Mind</th>
+            <th scope="col">Executive</th>
+    
+            <th scope="col">Responsibility</th>
+            <th scope="col">Response Ability</th>
+            <th scope="col">Team Handling</th>
+            <th scope="col">Planing</th>
+            <th scope="col">Communicate Ability</th>
+            <th scope="col">Passion</th>
+    
+            <th scope="col">Confidence</th>
+            <th scope="col">Profissional Background</th>
+            <th scope="col">Work Experience</th>
+            <th scope="col">Knowledge Level</th>
+            <th scope="col">English Skills</th>
+            <th scope="col">Other Languages </th>
+    
+            <th scope="col">Consider to Client</th>
+            <th scope="col">Internal Hiring</th>
+            <th scope="col">Reject</th>
+            <th scope="col">Remarks</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+    
+    
+        {% if consider_to_client %}
+            {%  for i in consider_to_client %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{i.created_at }}</td>
+                <td>{{i.user_name.Name }}</td>
+                <td>{{i.ReviewedBy }}</td>
+                <td>{{i.Moral_character}}</td>
+                <td>{{i.punctuality}}</td>
+                <td>{{i.health}}</td>
+                <td>{{i.behaviour}}</td>
+                <td>{{i.attitude }}</td>
+                <td>{{i.Career_goals}}</td>
+                <td>{{i.understanding_level}}</td>
+                <td>{{i.possitive_attitude_and_mind}}</td>
+                <td>{{i.executive}}</td>
+                <td>{{i.responsibility }}</td>
+                <td>{{i.response_ability}}</td>
+                <td>{{i.team_handling}}</td>
+                <td>{{i.planing}}</td>
+                <td>{{i.communicate_ability}}</td>
+                <td>{{i.passion }}</td>
+                <td>{{i.confidence}}</td>
+                <td>{{i.profissional_background}}</td>
+                <td>{{i.work_experience}}</td>
+                <td>{{i.knowledge_level}}</td>
+                <td>{{i.english_skils }}</td>
+                <td>{{i.other_languages}}</td>
+                <td>{{i.consider_to_client}}</td>
+                <td>{{i.Internal_hiring}}</td>
+                <td>{{i.reject}}</td>
+                <td>{{i.remarks}}</td>
+                
+            </tr>
+            {% endfor %}
+        {% endif %}
+    
+        {% if internal_hiring %}
+            {%  for i in internal_hiring %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{i.created_at }}</td>
+              <td>{{i.user_name.Name }}</td>
+              <td>{{i.ReviewedBy }}</td>
+              <td>{{i.Moral_character}}</td>
+              <td>{{i.punctuality}}</td>
+              <td>{{i.health}}</td>
+              <td>{{i.behaviour}}</td>
+              <td>{{i.attitude }}</td>
+              <td>{{i.Career_goals}}</td>
+              <td>{{i.understanding_level}}</td>
+              <td>{{i.possitive_attitude_and_mind}}</td>
+              <td>{{i.executive}}</td>
+              <td>{{i.responsibility }}</td>
+              <td>{{i.response_ability}}</td>
+              <td>{{i.team_handling}}</td>
+              <td>{{i.planing}}</td>
+              <td>{{i.communicate_ability}}</td>
+              <td>{{i.passion }}</td>
+              <td>{{i.confidence}}</td>
+              <td>{{i.profissional_background}}</td>
+              <td>{{i.work_experience}}</td>
+              <td>{{i.knowledge_level}}</td>
+              <td>{{i.english_skils }}</td>
+              <td>{{i.other_languages}}</td>
+              <td>{{i.consider_to_client}}</td>
+              <td>{{i.Internal_hiring}}</td>
+              <td>{{i.reject}}</td>
+              <td>{{i.remarks}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    
+        {% if reject %}
+            {%  for i in reject %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{i.created_at }}</td>
+              <td>{{i.user_name.Name }}</td>
+              <td>{{i.ReviewedBy }}</td>
+              <td>{{i.Moral_character}}</td>
+              <td>{{i.punctuality}}</td>
+              <td>{{i.health}}</td>
+              <td>{{i.behaviour}}</td>
+              <td>{{i.attitude }}</td>
+              <td>{{i.Career_goals}}</td>
+              <td>{{i.understanding_level}}</td>
+              <td>{{i.possitive_attitude_and_mind}}</td>
+              <td>{{i.executive}}</td>
+              <td>{{i.responsibility }}</td>
+              <td>{{i.response_ability}}</td>
+              <td>{{i.team_handling}}</td>
+              <td>{{i.planing}}</td>
+              <td>{{i.communicate_ability}}</td>
+              <td>{{i.passion }}</td>
+              <td>{{i.confidence}}</td>
+              <td>{{i.profissional_background}}</td>
+              <td>{{i.work_experience}}</td>
+              <td>{{i.knowledge_level}}</td>
+              <td>{{i.english_skils }}</td>
+              <td>{{i.other_languages}}</td>
+              <td>{{i.consider_to_client}}</td>
+              <td>{{i.Internal_hiring}}</td>
+              <td>{{i.reject}}</td>
+              <td>{{i.remarks}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+        
+        
+        </tbody>
+      </table>
+  </div>
+  <a href="{% url 'download_selected' value  %}" class="btn"><i class="fa fa-download"></i>Download</a>
+</body>
+</html>
+
+{% endblock %}
+
+
+
+
+
+
+
+

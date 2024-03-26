@@ -1,0 +1,165 @@
+
+{% extends 'ownbase.html' %}
+
+{% block dashboard %}
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href={% url 'dashboard' %}>Dashboard</a>
+</li>
+{% endblock %}
+
+{% block review %}
+{% endblock %}
+
+{% block filter %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  .table-container {
+    width: auto; /* Set width of container */
+    height: 400px; /* Set height of container */
+    overflow: auto; /* Enable both horizontal and vertical scrolling */
+    position: relative; /* Required for fixed headers */
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  thead th {
+    position: sticky; /* Make headers sticky */
+    top: 0; /* Stick to the top of the container */
+    background-color: #f2f2f2; /* Header background color */
+  }
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+  </style>
+<div class="table-container">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">General Skills</th>
+        <th scope="col">Technical Skills</th>
+        <th scope="col">Soft Skills</th>
+        <th scope="col">Current CTC</th>
+        <th scope="col">Expected CTC</th>
+        <th scope="col">Notice Period</th>
+        <th scope="col">Current designation</th>
+        <th scope="col">Applied designation</th>
+        <th scope="col">Experience</th>
+        <th scope="col">Job Portal Source</th>
+        <th scope="col">Contacted by</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% if data %}
+        
+        {%  for i in data %}
+        <tr>
+          <a href="{% url 'add_review'  %}" class="button">Add Review</a>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{i.created_date}}</td>
+            <td>{{i.Name}}</td>
+            <td>{{i.Primary_contact}}</td>
+            <td>{{i.Email_Id}}</td>
+            <td>{{i.General_Skills}}</td>
+            <td>{{i.Technical_Skills}}</td>
+            <td>{{i.Soft_Skills}}</td>
+            <td>{{i.Current_CTC}}</td>
+            <td>{{i.Expected_CTC}}</td>
+            <td>{{i.Notice_Period}}</td>
+            <td>{{i.Current_designation}}</td>
+            <td>{{i.Applied_designation}}</td>
+            <td>{{i.experience}}</td>
+            <td>{{i.Job_portal_source}}</td>
+            <td>{{i.Contacted_by}}</td>
+            
+        </tr>
+        {% endfor %}
+        {% endif %}
+
+        {% if CFT %}
+        {%  for i in CFT %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{i.created_date}}</td>
+            <td>{{i.Name}}</td>
+            <td>{{i.Primary_contact}}</td>
+            <td>{{i.Email_Id}}</td>
+            <td>{{i.General_Skills}}</td>
+            <td>{{i.Technical_Skills}}</td>
+            <td>{{i.Soft_Skills}}</td>
+            <td>{{i.Current_CTC}}</td>
+            <td>{{i.Expected_CTC}}</td>
+            <td>{{i.Notice_Period}}</td>
+            <td>{{i.Current_designation}}</td>
+            <td>{{i.Applied_designation}}</td>
+            <td>{{i.experience}}</td>
+            <td>{{i.Job_portal_source}}</td>
+            <td>{{i.Contacted_by}}</td>
+            
+        </tr>
+        {% endfor %}
+        {% endif %}
+        {% if total_data %}
+        {%  for i in total_data %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{i.created_at}}</td>
+            <td>{{i.Name}}</td>
+            <td>{{i.Primary_contact}}</td>
+            <td>{{i.Email_Id}}</td>
+            <td>{{i.General_Skills}}</td>
+            <td>{{i.Technical_Skills}}</td>
+            <td>{{i.Soft_Skills}}</td>
+            <td>{{i.Current_CTC}}</td>
+            <td>{{i.Expected_CTC}}</td>
+            <td>{{i.Notice_Period}}</td>
+            <td>{{i.Current_designation}}</td>
+            <td>{{i.Applied_designation}}</td>
+            <td>{{i.experience}}</td>
+            <td>{{i.Job_portal_source}}</td>
+            <td>{{i.Contacted_by}}</td>
+            
+        </tr>
+        {% endfor %}
+        {% endif %}
+        {% if CFY %}
+        {%  for i in CFY %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{i.created_at}}</td>
+            <td>{{i.Name}}</td>
+            <td>{{i.Primary_contact}}</td>
+            <td>{{i.Email_Id}}</td>
+            <td>{{i.General_Skills}}</td>
+            <td>{{i.Technical_Skills}}</td>
+            <td>{{i.Soft_Skills}}</td>
+            <td>{{i.Current_CTC}}</td>
+            <td>{{i.Expected_CTC}}</td>
+            <td>{{i.Notice_Period}}</td>
+            <td>{{i.Current_designation}}</td>
+            <td>{{i.Applied_designation}}</td>
+            <td>{{i.experience}}</td>
+            <td>{{i.Job_portal_source}}</td>
+            <td>{{i.Contacted_by}}</td>
+            
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+<!-- verification/templates/verification/verify_phone_number.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send Verification Code</button>
+</form>
